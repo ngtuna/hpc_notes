@@ -1,0 +1,30 @@
+
+mpi_bug1 demonstrates how miscoding even a simple parameter like a message tag can lead to a hung program.
+Verify that the message sent from task 0 is not exactly what task 1 is expecting.
+Matching the send tag with the receive tag solves the problem.
+
+mpi_bug2 shows another type of miscoding.
+The data type of the message sent by task 0 is not what task 1 expects.
+Nevertheless, the message is received, resulting in wrong results or abnormal termination -
+depending upon the MPI library and platform. Matching the send data type with the receive data type solves the problem.
+
+mpi_bug3 shows what happens when the MPI environment is not initialized or terminated properly.
+Inserting the MPI init and finalize calls in the right locations will solve the problem.
+
+mpi_bug4 shows what happens when a task does not participate in a collective communication call.
+In this case, task 0 needs to call MPI_Reduce as the other tasks do.
+
+mpi_bug5 demonstrates an unsafe program, because sometimes it will execute fine, and other times it will fail.
+The reason why the program fails or hangs is due to buffer exhaustion on the receiving task side,
+as a consequence of the way an MPI library has implemented an eager protocol for messages of a certain size.
+One possible solution is to include an MPI_Barrier call in  the both the send and receive loops.
+
+mpi_bug6 has a bug that will terminate the program in some cases but be ignored in other cases.
+The problem is that task 2 performs a blocking operation, but then hits the MPI_Wait call near the end of the program.
+Only the tasks that make non-blocking calls should hit the MPI_Wait.
+The coding error in this case is easy to fix - simply make sure task 2 does not encounter the MPI_Wait call.
+
+mpi_bug7 performs a collective communication broadcast but erroneously codes the count argument
+incorrectly resulting in a hang condition.
+
+}
