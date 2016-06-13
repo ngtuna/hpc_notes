@@ -1,5 +1,16 @@
 # MPI notes
 
+## Contents
+- Communicator
+- Point-to-Point communication
+  - Blocking
+  - Non-blocking
+  - Synchronization
+- Collective communication
+  - Synchronization
+  - Data movement
+  - Collective computation    
+
 ## The minimal set of MPI routines
 
 ```

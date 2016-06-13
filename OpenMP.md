@@ -1,4 +1,9 @@
 # OpenMP notes
+## Contents
+- Scope of variables
+- Reduction
+- Critical
+- Synchronization
 
 ## Scope of variables
 There are three common scopes of variables: shared, private, firstprivate.
