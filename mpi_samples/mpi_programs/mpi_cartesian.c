@@ -36,16 +36,16 @@ if (numtasks == SIZE) {
   MPI_Cart_shift(cartcomm, 0, 1, &nbrs[UP], &nbrs[DOWN]);
   MPI_Cart_shift(cartcomm, 1, 1, &nbrs[LEFT], &nbrs[RIGHT]);
 
-  outbuf = rank;
-
-  for (i=0; i<4; i++) {
-     dest = nbrs[i];
-     source = nbrs[i];
-     MPI_Isend(&outbuf, 1, MPI_INT, dest, tag, MPI_COMM_WORLD, &reqs[i]);
-     MPI_Irecv(&inbuf[i], 1, MPI_INT, source, tag, MPI_COMM_WORLD, &reqs[i+4]);
-     }
-
-  MPI_Waitall(8, reqs, stats);
+  // outbuf = rank;
+  //
+  // for (i=0; i<4; i++) {
+  //    dest = nbrs[i];
+  //    source = nbrs[i];
+  //    MPI_Isend(&outbuf, 1, MPI_INT, dest, tag, MPI_COMM_WORLD, &reqs[i]);
+  //    MPI_Irecv(&inbuf[i], 1, MPI_INT, source, tag, MPI_COMM_WORLD, &reqs[i+4]);
+  //    }
+  //
+  // MPI_Waitall(8, reqs, stats);
 
   printf("rank= %d coords= %d %d  neighbors(u,d,l,r)= %d %d %d %d\n",
          rank,coords[0],coords[1],nbrs[UP],nbrs[DOWN],nbrs[LEFT],
