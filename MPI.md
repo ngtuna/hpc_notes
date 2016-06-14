@@ -215,7 +215,9 @@ double A[100], B[100];
 int left_neighbor, right_neighbor, tag=999;
 MPI_Status stat_send, stat_recv;
 ...
-MPI_Send_init(A,100,MPI_DOUBLE,left_neighbor,tag,MPI_COMM_WORLD,&req_send); MPI_Recv_init(B,100,MPI_DOUBLE,right_neighbor,tag,MPI_COMM_WORLD,&req_recv); MPI_Start(&req_send);
+MPI_Send_init(A,100,MPI_DOUBLE,left_neighbor,tag,MPI_COMM_WORLD,&req_send);
+MPI_Recv_init(B,100,MPI_DOUBLE,right_neighbor,tag,MPI_COMM_WORLD,&req_recv);
+MPI_Start(&req_send);
 MPI_Start(&req_recv);
 ... // do something else useful
 MPI_Wait(&req_send, &stat_send);
@@ -427,7 +429,7 @@ void main(int argc, char *argv[])
 Reduction result stored in output buffer of all processors.
 
 ```c
-int MPI_Reduce ( void* send_buffer, void* recv_buffer, int count, MPI_Datatype datatype,
+int MPI_Allreduce ( void* send_buffer, void* recv_buffer, int count, MPI_Datatype datatype,
                  MPI_Op operation, MPI_Comm comm )
 ```
 

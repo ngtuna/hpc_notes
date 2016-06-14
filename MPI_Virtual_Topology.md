@@ -32,12 +32,12 @@ The **MPI_CART_CREATE** routine creates a new communicator using a Cartesian top
 int MPI_Cart_create ( MPI_Comm old_comm, int ndims, int *dim_size,
                       int *periods, int reorder, MPI_Comm *new_comm)
 
-old_comm              existing communicator
-ndims                 number of dimensions of Cartesian topology
-dim_size              vector, dimension [ndims], number of processes in each direction
-periods               vector, dimension [ndims], true or false, periodic or not in each direction
-reorder               true: is allowed to reorder rank; false: no re-ordering of ranks
-new_comm              new communicator with Cartesian topology
+old_comm          input    existing communicator
+ndims             input    number of dimensions of Cartesian topology
+dim_size          input    vector, dimension [ndims], number of processes in each direction
+periods           input    vector, dimension [ndims], true or false, periodic or not in each direction
+reorder           input    true: is allowed to reorder rank; false: no re-ordering of ranks
+new_comm          output   new communicator with Cartesian topology
 ~~~~
 
 For **_Example_** we use MPI_CART_CREATE to map (or rename) 6 processes from a linear ordering (i.e., 0,1,2,3,4,5) into a two-dimensional matrix ordering of 3 rows by 2 columns (i.e., (0,0), (0,1), ..., (2,1) ). Figure below depicts the resulting Cartesian grid representation for the processes.
@@ -74,10 +74,10 @@ The **MPI_CART_COORDS** routine returns the corresponding Cartesian coordinates 
 ```
 int MPI_Cart_coords( MPI_Comm comm, int rank, int maxdims, int *coords )
 
-comm                Communicator handle
-rank                Calling process rank
-maxdims             Number of dimensions in cartesian topology
-coords              Corresponding cartesian coordinates of rank
+comm           input     Communicator handle
+rank           input     Calling process rank
+maxdims        input     Number of dimensions in cartesian topology
+coords         output    Corresponding cartesian coordinates of rank
 ```
 
 **_Example_**
@@ -100,9 +100,9 @@ The **MPI_CART_RANK** routine returns the corresponding process rank of the Cart
 ```
 int MPI_Cart_rank( MPI_Comm comm, int *coords, int *rank )
 
-comm                Cartesian communicator handle
-coords              Array of size ndims specifying Cartesian coordinates
-rank                Process rank of process specified by its Cartesian coordinates, coords
+comm           input     Cartesian communicator handle
+coords         input     Array of size ndims specifying Cartesian coordinates
+rank           output    Process rank of process specified by its Cartesian coordinates, coords
 ```
 
 **_Example_**
@@ -129,9 +129,9 @@ The **MPI_CART_SUB** routine creates new communicators for sub-grids of up to (N
 ```
 int MPI_Cart_sub( MPI_Comm old_comm, int *belongs, MPI_Comm *new_comm )
 
-old_comm            Cartesian communicator handle
-belongs             Array of size ndims specifying whether a dimension belongs to new_comm
-new_comm            Cartesian communicator handle
+old_comm        input    Cartesian communicator handle
+belongs         input    Array of size ndims specifying whether a dimension belongs to new_comm
+new_comm        output   Cartesian communicator handle
 ```
 
 **_Example_**
@@ -159,8 +159,8 @@ The **MPI_CARTDIM_GET** routine determines the number of dimensions of a sub-gri
 ```
 int MPI_Cartdim_get (MPI_Comm comm, int *ndims)
 
-comm                Cartesian communicator handle
-ndims               Number of dimensions
+comm          input      Cartesian communicator handle
+ndims         output     Number of dimensions
 ```
 
 **_Example_**
@@ -181,11 +181,11 @@ The **MPI_CART_GET** routine retrieves properties such as periodicity and size o
 ```
 int MPI_Cart_get( MPI_Comm subgrid_comm, int ndims, int *dims, int *periods, int *coords )
 
-subgrid_comm        Communicator handle
-ndims               Number of dimensions
-dims                Array of size ndims providing length in each dimension
-periods             Array of size ndims specifying periodicity status of each dimension
-coords              Array of size ndims providing Cartesian coordinates of calling process
+subgrid_comm     input   Communicator handle
+ndims            input   Number of dimensions
+dims             output  Array of size ndims providing length in each dimension
+periods          output  Array of size ndims specifying periodicity status of each dimension
+coords           output  Array of size ndims providing Cartesian coordinates of calling process
 ```
 
 **_Example_**
